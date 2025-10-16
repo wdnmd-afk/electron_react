@@ -1,0 +1,18 @@
+appId: com.electronreactts.learning
+productName: Electron React TS Learning
+asar: true
+directories:
+  output: dist_app
+files:
+  - frontend/dist/**
+  - frontend/dist-electron/**
+  - '!**/*.map'
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true

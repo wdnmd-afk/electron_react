@@ -1,5 +1,7 @@
 /* 引入 Tailwind v4 基础样式（替代旧版的 @tailwind base/components/utilities 指令） */
+
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,6 +16,39 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --radius: 0.625rem;
+  /* 系统主题色：背景与文字（通过 Tailwind token bg-background / text-foreground 使用） */
+  --background: #112d4e;
+  --foreground: #dbe2ef;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.147 0.004 49.25);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.147 0.004 49.25);
+  --primary: oklch(0.216 0.006 56.043);
+  --primary-foreground: oklch(0.985 0.001 106.423);
+  --secondary: oklch(0.97 0.001 106.424);
+  --secondary-foreground: oklch(0.216 0.006 56.043);
+  --muted: oklch(0.97 0.001 106.424);
+  --muted-foreground: oklch(0.553 0.013 58.071);
+  --accent: oklch(0.97 0.001 106.424);
+  --accent-foreground: oklch(0.216 0.006 56.043);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.923 0.003 48.717);
+  --input: oklch(0.923 0.003 48.717);
+  --ring: oklch(0.709 0.01 56.259);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0.001 106.423);
+  --sidebar-foreground: oklch(0.147 0.004 49.25);
+  --sidebar-primary: oklch(0.216 0.006 56.043);
+  --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
+  --sidebar-accent: oklch(0.97 0.001 106.424);
+  --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
+  --sidebar-border: oklch(0.923 0.003 48.717);
+  --sidebar-ring: oklch(0.709 0.01 56.259);
 }
 
 a {
@@ -67,5 +102,293 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  /* 让应用层在装饰背景之上 */
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 让 h-full 能覆盖至视口（与用户设置一致） */
+  html,
+  body,
+  #root {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* 中文注释：禁止滚动条 */
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+  }
+}
+
+/* ===================== 液态玻璃（Liquid Glass）深色主题增强 ===================== */
+/* 中文注释：以下样式提供深色渐变背景与通用玻璃拟态工具类，组件可复用 */
+
+@layer base {
+  /* 中文注释：全局背景由 App.tsx 通过 import 引入并设置 */
+  body {
+    background-color: #f3f3f3; /* 中文注释：空余空间使用浅灰色填充 */
+    overflow: hidden; /* 中文注释：禁止 body 滚动 */
+  }
+}
+
+@layer utilities {
+  /* ============== liquidGlass 完全复刻 test.html ============== */
+
+  /* 中文注释：基础 wrapper 样式 */
+  .liquidGlass-wrapper {
+    position: relative;
+    display: flex;
+    font-weight: 600;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+    /* 中文注释：优化过渡性能，只对 transform 和 box-shadow 应用过渡 */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+      box-shadow 0.3s ease;
+    /* 中文注释：确保子元素不超出容器边界 */
+    contain: paint;
+  }
+
+  /* 中文注释：三层叠加层的通用样式 */
+  .liquidGlass-effect {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    /* 中文注释：backdrop-filter 与 filter 由组件动态设置 */
+    overflow: hidden;
+    isolation: isolate;
+    /* 中文注释：继承父容器的圆角，确保完全覆盖且不超出 */
+    border-radius: inherit;
+    /* 中文注释：确保完全填充容器 */
+    width: 100%;
+    height: 100%;
+    /* 中文注释：防止 backdrop-filter 边缘模糊不完整 */
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .liquidGlass-tint {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    /* 中文注释：通过 CSS 变量控制玻璃白色遮罩强度，默认 0.25 */
+    background: rgba(255, 255, 255, var(--glass-tint-opacity, 0.25));
+    /* 中文注释：继承父容器的圆角 */
+    border-radius: inherit;
+  }
+
+  .liquidGlass-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+    /* 中文注释：继承父容器的圆角 */
+    border-radius: inherit;
+  }
+
+  .liquidGlass-text {
+    position: relative;
+    z-index: 3;
+    font-size: 2rem;
+    color: black;
+    /* 中文注释：确保内容层完全填充容器 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  /* 中文注释：menu 变体（纵向菜单） */
+  .menu {
+    padding: 0.4rem;
+    border-radius: 1.8rem;
+  }
+
+  .menu:hover {
+    /* 中文注释：移除 padding 变化，改用 scale 避免布局重排 */
+    transform: scale(1.02);
+  }
+
+  /* 中文注释：card 变体（课程卡片，无 hover padding 变化） */
+  .card {
+    padding: 0.4rem;
+    border-radius: 1.8rem;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* 中文注释：menu 内部的直接子元素（仅在 test.html 的特定结构中使用） */
+  .menu.menu-vertical > .liquidGlass-text > div {
+    font-size: 20px;
+    color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.8rem;
+    transition: all 0.1s ease-in;
+  }
+
+  .menu.menu-vertical > .liquidGlass-text > div:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: inset -2px -2px 2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+  }
+
+  /* 中文注释：dock 变体（横向图标条） */
+  .dock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 2rem;
+    padding: 0.6rem;
+  }
+
+  .dock,
+  .dock > div {
+    border-radius: 2rem;
+  }
+
+  .dock:hover {
+    padding: 0.8rem;
+    border-radius: 2.5rem;
+  }
+
+  .dock:hover > div {
+    border-radius: 2.5rem;
+  }
+
+  .dock img {
+    width: 75px;
+    padding: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  }
+
+  .dock img:hover {
+    transform-origin: center center;
+  }
+
+  /* 中文注释：button 变体（大按钮） */
+  .button {
+    padding: 1.5rem 2.5rem;
+    border-radius: 3rem;
+  }
+
+  .button,
+  .button > div {
+    border-radius: 3rem;
+  }
+
+  .button:hover {
+    padding: 1.8rem 2.8rem;
+  }
+
+  .button:hover > div {
+    border-radius: 4rem;
+  }
+
+  .button svg {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  }
+
+  .button:hover svg {
+    transform: scale(0.95);
+  }
+
+  /* 中文注释：移除 ::before/::after，改用 GlassOverlay 组件统一管理 tint/shine 层 */
+
+  /* ============== 叠加层（可用于任意相对定位容器） ============== */
+  .glass-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* 中文注释：叠加层不拦截交互 */
+    /* 中文注释：应用 SVG 滤镜产生液态折射效果（test.html 风格更强烈） */
+    filter: url(#glass-distortion);
+  }
+  .glass-overlay__tint,
+  .glass-overlay__shine {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* 中文注释：确保叠加层不拦截交互 */
+  }
+  /* 中文注释：tint 层 - 参考 test.html 的白色半透明层，降低透明度让背景更清晰 */
+  .glass-overlay__tint {
+    z-index: 1;
+    background: rgba(
+      255,
+      255,
+      255,
+      0.15
+    ); /* 从 0.25 降至 0.15，让背景图更清晰 */
+  }
+  /* 中文注释：shine 层 - 参考 test.html 的内阴影高光 */
+  .glass-overlay__shine {
+    z-index: 2;
+    box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.4),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* 移除暗色主题变量块，当前只使用背景图片方案 */
+
+/* 中文注释：test.html 的背景滚动动画 */
+@keyframes moveBackground {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% -1000%;
   }
 }
