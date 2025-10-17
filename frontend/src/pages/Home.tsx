@@ -272,7 +272,7 @@ export const Home: React.FC = () => {
       {/* 中文注释：统计卡片行（使用 AntD Card，增强可读性与对比度） */}
       <Row gutter={[24, 24]} style={{ marginBottom: '32px' }}>
         <Col xs={24} sm={12} lg={6}>
-          <Card hoverable bordered bodyStyle={{ padding: 24 }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
+          <Card hoverable variant="outlined" styles={{ body: { padding: 24 } }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
             <Statistic
               title={<span style={{ color: '#2c3e50', fontSize: '15px', fontWeight: 600 }}>活跃用户</span>}
               value={activeUsers}
@@ -289,7 +289,7 @@ export const Home: React.FC = () => {
         </Col>
 
         <Col xs={24} sm={12} lg={6}>
-          <Card hoverable bordered bodyStyle={{ padding: 24 }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
+          <Card hoverable variant="outlined" styles={{ body: { padding: 24 } }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
             <Statistic
               title={<span style={{ color: '#2c3e50', fontSize: '15px', fontWeight: 600 }}>系统响应</span>}
               value={98.5}
@@ -302,7 +302,7 @@ export const Home: React.FC = () => {
         </Col>
 
         <Col xs={24} sm={12} lg={6}>
-          <Card hoverable bordered bodyStyle={{ padding: 24 }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
+          <Card hoverable variant="outlined" styles={{ body: { padding: 24 } }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
             <Statistic
               title={<span style={{ color: '#2c3e50', fontSize: '15px', fontWeight: 600 }}>处理速度</span>}
               value={2.8}
@@ -315,7 +315,7 @@ export const Home: React.FC = () => {
         </Col>
 
         <Col xs={24} sm={12} lg={6}>
-          <Card hoverable bordered bodyStyle={{ padding: 24 }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
+          <Card hoverable variant="outlined" styles={{ body: { padding: 24 } }} style={{ background: '#fff', borderRadius: 14, boxShadow: '0 6px 18px rgba(0,0,0,0.06)' }}>
             <Statistic
               title={<span style={{ color: '#2c3e50', fontSize: '15px', fontWeight: 600 }}>运行时长</span>}
               value={72}
@@ -330,12 +330,12 @@ export const Home: React.FC = () => {
       {/* 中文注释：新增图表行 - 多折线 & 渠道占比饼图（AntD Card 容器） */}
       <Row gutter={[24, 24]} style={{ marginBottom: '32px' }}>
         <Col xs={24} lg={12}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={multiLineOption} style={{ height: 300 }} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={trafficPieOption} style={{ height: 300 }} />
           </Card>
         </Col>
@@ -344,12 +344,12 @@ export const Home: React.FC = () => {
       {/* 中文注释：ECharts 图表区（解决卡顿，提升动画流畅度） */}
       <Row gutter={[24, 24]} style={{ marginBottom: '32px' }}>
         <Col xs={24} lg={12}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={sparkOption} style={{ height: 240 }} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={gaugeOption} style={{ height: 240 }} />
           </Card>
         </Col>
@@ -358,12 +358,12 @@ export const Home: React.FC = () => {
       {/* 中文注释：新增图表行 - 环形图 & 玫瑰图 */}
       <Row gutter={[24, 24]} style={{ marginBottom: '32px' }}>
         <Col xs={24} lg={12}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={donutOption} style={{ height: 260 }} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={categoryRoseOption} style={{ height: 260 }} />
           </Card>
         </Col>
@@ -372,7 +372,7 @@ export const Home: React.FC = () => {
       {/* 中文注释：活跃热力图（全宽） */}
       <Row gutter={[24, 24]} style={{ marginBottom: '32px' }}>
         <Col xs={24}>
-          <Card bordered bodyStyle={{ padding: 12 }} style={{ background: '#fff', borderRadius: 14 }}>
+          <Card variant="outlined" styles={{ body: { padding: 12 } }} style={{ background: '#fff', borderRadius: 14 }}>
             <EChart option={heatmapOption} style={{ height: 360 }} />
           </Card>
         </Col>
@@ -387,7 +387,7 @@ export const Home: React.FC = () => {
           { title: '日志查看', desc: '查看系统运行日志', icon: '📝', color: '#e74c3c' },
         ].map((item, index) => (
           <Col xs={24} sm={12} lg={6} key={index}>
-            <Card hoverable bordered bodyStyle={{ padding: 24 }} style={{ height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 14 }}>
+            <Card hoverable variant="outlined" styles={{ body: { padding: 24 } }} style={{ height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 14 }}>
               <div style={{ 
                 fontSize: '48px', 
                 marginBottom: '16px',

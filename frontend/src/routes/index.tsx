@@ -9,6 +9,7 @@ import Analytics from '@/pages/Analytics'
 import Database from '@/pages/Database'
 import Performance from '@/pages/Performance'
 import Settings from '@/pages/Settings'
+import SystemCenter from '@/pages/SystemCenter'
 
 const AppRoutes: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/database" element={<Database />} />
         <Route path="/performance" element={<Performance />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/system" element={<SystemCenter />} />
       </Routes>
     </Layout>
   )

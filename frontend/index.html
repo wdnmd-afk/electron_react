@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 中文注释：内容安全策略（开发：允许本地 http 与 ws；生产：保持严格） -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' http://localhost:* ws://localhost:*; font-src 'self' data:; media-src 'self' blob:; object-src 'self'" />
     <title>frontend</title>
   </head>
   <body>

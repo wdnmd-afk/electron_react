@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ConfigProvider, theme } from "antd";
+import { ConfigProvider, theme, App as AntdApp } from "antd";
 import "./App.css";
 import AppRoutes from "@/routes";
 import bgImage from "@/assets/images/newBg.png";
@@ -23,7 +23,8 @@ function App() {
         token: {
           // 中文注释：配置主题色，与玻璃拟态风格协调，增强对比度
           colorPrimary: "#1890ff",
-          colorBgContainer: "rgba(255, 255, 255, 0.05)",
+          // 中文注释：容器背景统一采用白色，避免背景图穿透影响可读性
+          colorBgContainer: "#ffffff",
           colorBorder: "rgba(0, 0, 0, 0.1)",
           borderRadius: 12,
           fontSize: 15,
@@ -34,10 +35,11 @@ function App() {
           Menu: {
             // 中文注释：Menu 组件透明化，适配玻璃拟态
             itemBg: "transparent",
-            itemSelectedBg: "rgba(255, 255, 255, 0.35)",
-            itemHoverBg: "rgba(255, 255, 255, 0.2)",
-            itemActiveBg: "rgba(255, 255, 255, 0.3)",
-            itemSelectedColor: "#1a1a1a",
+            // 中文注释：提升选中可见度（浅蓝底、主题色文字）
+            itemSelectedBg: "#e6f4ff",
+            itemHoverBg: "#f5faff",
+            itemActiveBg: "#dbeaff",
+            itemSelectedColor: "#1677ff",
             itemColor: "#2c3e50",
             horizontalItemSelectedColor: "#1a1a1a",
             itemBorderRadius: 10,
@@ -55,6 +57,7 @@ function App() {
         },
       }}
     >
+      <AntdApp>
       <BrowserRouter>
         {/* 中文注释：背景层（固定，不滚动） */}
         <div
@@ -84,6 +87,7 @@ function App() {
           {showFPS ? <FPSOverlay /> : null}
         </div>
       </BrowserRouter>
+      </AntdApp>
     </ConfigProvider>
   );
 }

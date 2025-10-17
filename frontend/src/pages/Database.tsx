@@ -1,6 +1,6 @@
 // 中文注释：数据管理页面 - 交互式表格（新增/删除/导出/过滤）
 import React, { useMemo, useState } from 'react'
-import { Table, Button, Input, Space, message, Popconfirm, Tag } from 'antd'
+import { Table, Button, Input, Space, Popconfirm, Tag, App } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import LiquidGlassContainer from '@/components/LiquidGlass/LiquidGlassContainer'
 
@@ -19,6 +19,8 @@ const randomRow = (i: number): RowData => ({
 })
 
 const Database: React.FC = () => {
+  // 中文注释：AntD 上下文 message（避免静态 message 警告）
+  const { message } = App.useApp()
   const [rows, setRows] = useState<RowData[]>(() => Array.from({ length: 12 }, (_, i) => randomRow(i)))
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [keyword, setKeyword] = useState('')

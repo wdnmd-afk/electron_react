@@ -11,6 +11,7 @@ import {
   SettingOutlined,
   DatabaseOutlined,
   ThunderboltOutlined,
+  AppstoreOutlined,
 } from "@ant-design/icons";
 import LiquidGlassContainer from "@/components/LiquidGlass/LiquidGlassContainer";
 
@@ -45,7 +46,28 @@ const Navbar: React.FC = () => {
       icon: <SettingOutlined />,
       label: "系统设置",
     },
+    {
+      key: "/system",
+      icon: <AppstoreOutlined />,
+      label: "系统功能",
+    },
   ];
+
+  // 中文注释：计算选中 key（最长前缀匹配，避免二级路径不高亮）
+  const selectedKey = React.useMemo(() => {
+    const keys = [
+      "/",
+      "/analytics",
+      "/database",
+      "/performance",
+      "/settings",
+      "/system",
+    ];
+    const path = location.pathname || "/";
+    // 中文注释：按 key 长度降序，匹配第一个前缀
+    const match = keys.sort((a, b) => b.length - a.length).find(k => path === k || path.startsWith(k + "/") || (k === "/" && path === "/"));
+    return match || "/";
+  }, [location.pathname]);
 
   // 中文注释：菜单点击事件
   const handleMenuClick: MenuProps["onClick"] = (e) => {
@@ -74,7 +96,7 @@ const Navbar: React.FC = () => {
         {/* 中文注释：Ant Design Menu 组件 */}
         <Menu
           mode="horizontal"
-          selectedKeys={[location.pathname]}
+          selectedKeys={[selectedKey]}
           items={menuItems}
           onClick={handleMenuClick}
           style={{
@@ -82,6 +104,7 @@ const Navbar: React.FC = () => {
             background: "transparent",
             border: "none",
             justifyContent: "center",
+            width: "100%",
             fontSize: "15px",
             fontWeight: 500,
           }}
